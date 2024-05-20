@@ -1,0 +1,113 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:react/jsx-runtime"
+  ],
+  "plugins": ["@nx"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ],
+        "react/function-component-definition": [
+          2,
+          {
+            "namedComponents": "arrow-function"
+          }
+        ],
+        "no-underscore-dangle": [
+          "error",
+          {
+            "allow": ["__typename"]
+          }
+        ],
+        "import/no-anonymous-default-export": ["error"],
+        "import/no-default-export": ["error"],
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "packageDir": "."
+          }
+        ],
+        "curly": ["error", "all"],
+        "import/prefer-default-export": "off",
+        "react/require-default-props": "off",
+        "react/jsx-props-no-spreading": "off",
+        "default-case": "off",
+        "consistent-return": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "no-plusplus": "off",
+        "react/prop-types": "off",
+        "react/destructuring-assignment": "off",
+        "react/no-unstable-nested-components": ["error", {
+          "allowAsProps": true
+        }]
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "rules": {
+        "@typescript-eslint/no-unused-expressions": "off",
+        "import/no-extraneous-dependencies": "off",
+        "cypress/no-unnecessary-waiting": "off"
+      }
+    },
+    {
+      "files": ["*.test.ts", "*.test.tsx", "*.test.js", "*.test.jsx"],
+      "env": {
+        "jest": true
+      },
+      "rules": {
+        "@typescript-eslint/no-unused-expressions": "off",
+        "import/no-extraneous-dependencies": "off"
+      }
+    },
+    {
+      "files": [
+        "*.stories.ts",
+        "*.stories.tsx",
+        "*.stories.js",
+        "*.stories.jsx",
+        "libs/storybook-host/.storybook/preview.tsx"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "import/no-anonymous-default-export": "off",
+        "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": ["remote-entry.ts", "cypress.config.js", "jest.config.ts"],
+      "rules": {
+        "import/no-default-export": "off",
+        "import/no-anonymous-default-export": "off"
+      }
+    },
+    {
+      "files": "*.json",
+      "parser": "jsonc-eslint-parser",
+      "rules": {}
+    }
+  ]
+}
